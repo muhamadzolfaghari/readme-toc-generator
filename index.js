@@ -7,14 +7,68 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Enter some input: ", (input) => {
+rl.question("Enter MARKDOWN.md path: ", (input) => {
   writeTOCFile(input);
   rl.close();
 });
 
+/**
+ * Generates a table of contents for a Markdown file and writes it to a new file.
+ *
+ * @param {string} input - The path to the input Markdown file.
+ * @returns {void}
+ */
 function writeTOCFile(input) {
+  let content;
   const { dir } = path.parse(input);
-  const content = fs.readFileSync(input, "utf8");
+
+  try {
+    content = fs.readFileSync(input, "utf8");
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+
+  const tocContent = getTOCContent(content);
+
+  try {
+    fs.writeFileSync(path.join(dir, "README-TOC.md"), tocContent);
+    console.log("Table of Contents generated successfully!");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+/**
+ * Generates a link from an anchor or title.
+ *
+ * @param {string} [anchor] - The anchor.
+ * @param {string} title - The title if no anchor.
+ * @returns {string} The link.
+ */
+const getHeadingLink = (anchor, title) =>
+  anchor ??
+  title
+    .split(" ")
+    .map((x) => x.toLowerCase())
+    .join("-")
+    .replace(".", "-");
+
+/**
+ * Generates indentation for heading based on level.
+ *
+ * @param {number} level - The heading level.
+ * @returns {string} The indentation string.
+ */
+const getHeadingIndent = (level) => " ".repeat(Math.max(0, level - 2) * 2);
+
+/**
+ * Generates a TOC from headings in provided content.
+ *
+ * @param {string} content - The content to generate the TOC from.
+ * @returns {string} The content with the generated TOC inserted.
+ */
+function getTOCContent(content) {
   let afterFirstLevelIndex;
   const lines = content.split("\n");
   const tableOfContents = ["", "## Table of Contents", ""];
@@ -43,33 +97,8 @@ function writeTOCFile(input) {
     lines.splice(afterFirstLevelIndex, 0, ...tableOfContents);
   }
 
-  fs.writeFileSync(path.join(dir, "README-TOC.md"), lines.join("\n"));
-  console.log("Table of Contents generated successfully!");
+  return lines.join("\n");
 }
-
-/**
- * Generates a link from an anchor or title.
- *
- * @param {string} [anchor] - The anchor.
- * @param {string} title - The title if no anchor.
- * @returns {string} The link.
- */
-const getHeadingLink = (anchor, title) =>
-  anchor ??
-  title
-    .split(" ")
-    .map((x) => x.toLowerCase())
-    .join("-")
-    .replace(".", "-");
-
-/**
- * Generates an indentation string for a heading based on its level.
- * Subtract 2 from heading level for h1 (no indent) and h2 (0 spaces indent)
- *
- * @param {number} level - The heading level, starting from 1.
- * @returns {string} The indentation string for the heading.
- */
-const getHeadingIndent = (level) => " ".repeat(Math.max(0, level - 2) * 2);
 
 /**
  * Generates a heading match from a line.
