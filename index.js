@@ -7,7 +7,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Enter MARKDOWN.md path: ", (input) => {
+rl.question("Enter markdown path: ", (input) => {
   writeTOCFile(input);
   rl.close();
 });
