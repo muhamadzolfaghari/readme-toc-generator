@@ -8,7 +8,6 @@ const rl = readline.createInterface({
 });
 
 rl.question("Enter some input: ", (input) => {
-  console.log(`You entered: ${input}`);
   writeTOCFile(input);
   rl.close();
 });
@@ -85,9 +84,6 @@ function getHeading(line) {
 
   if (matchArray?.length) {
     const [, sharps, title, anchor] = matchArray;
-
-    console.log(sharps, title, anchor);
-
     const level = sharps.length;
     const link = getHeadingLink(anchor, title);
     const indent = getHeadingIndent(level);
