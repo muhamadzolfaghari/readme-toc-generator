@@ -116,7 +116,7 @@ function getHeading(line) {
     const level = sharps.length;
     const link = getHeadingLink(anchor, title);
     const indent = getHeadingIndent(level);
-    const content = `${indent} - [${title}](${link})`;
+    const content = `${indent} - [${title}](#${link})`;
 
     return { content, level };
   }
