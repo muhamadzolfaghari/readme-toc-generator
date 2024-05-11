@@ -1,6 +1,6 @@
 Readme TOC Generator 🧬
 
-An improved generator for creating a table of contents for Markdown files.
+An generator for creating a table of contents for Markdown files.
 
 After specifying the input file, an output file named README-TOC.md is automatically generated in the same directory as the input file, containing the generated table of contents.
 
@@ -27,7 +27,7 @@ npm run start
 2. Enter the path to your Markdown file when prompted:
 
 ```shell
-Enter MARKDOWN.md path:
+Enter markdown path:
 ```
 
 ### Sample path to file
