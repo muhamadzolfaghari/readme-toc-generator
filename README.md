@@ -8,13 +8,14 @@ After specifying the input file, an output file named README-TOC.md is automatic
 
 ## Table of Contents
 
-- [Usage](usage)
+ - [Usage](#usage)
 
-  - [Sample path to file](sample-path-to-file)
+   - [Sample path to file](#sample-path-to-file)
 
-- [Error and Exception](error-and-exception)
+ - [Error and Exception](#error-and-exception)
 
-- [Attention before usage](attention-before-usage)
+ - [Attention before usage](#attention-before-usage)
+
 
 ## Usage
 
