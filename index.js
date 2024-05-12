@@ -20,7 +20,11 @@ rl.question("Enter markdown path: ", (input) => {
  */
 function writeTOCFile(input) {
   let content;
-  const { dir } = path.parse(input);
+  const { dir, name, ext } = path.parse(input);
+
+  if (!validateInput(input, ext)) {
+    return
+  }
 
   try {
     content = fs.readFileSync(input, "utf8");
@@ -32,7 +36,7 @@ function writeTOCFile(input) {
   const tocContent = getTOCContent(content);
 
   try {
-    fs.writeFileSync(path.join(dir, "README-TOC.md"), tocContent);
+    fs.writeFileSync(path.join(dir, `${name}-TOC.md`), tocContent);
     console.log("Table of Contents generated successfully!");
   } catch (err) {
     console.error(err);
@@ -46,13 +50,45 @@ function writeTOCFile(input) {
  * @param {string} title - The title if no anchor.
  * @returns {string} The link.
  */
-const getHeadingLink = (anchor, title) =>
-  anchor ??
-  title
+function getHeadingLink(anchor, title) {
+  if (anchor) {
+    return anchor;
+  }
+
+  const matchArray = title.match(/^\d+\. /);
+
+  if (matchArray) {
+    title = title.replace(". ", "-");
+  }
+
+  return title
     .split(" ")
     .map((x) => x.toLowerCase())
     .join("-")
-    .replace(".", "-");
+}
+
+
+/**
+ * Validates the provided input file path and extension.
+ *
+ * @param {string} input - The file path to validate.
+ * @param {string} ext - The expected file extension.
+ * @returns {boolean} `true` if the input is valid, `false` otherwise.
+ */
+function validateInput(input, ext) {
+  if (!ext || ext !== ".md") {
+    console.error("Invalid file extension. Please provide a Markdown file.");
+    return false;
+  }
+
+  if (!fs.existsSync(input)) {
+    console.error("Invalid path. Please provide a valid path to a Markdown file.");
+    return false;
+  }
+
+  return true;
+}
+
 
 /**
  * Generates indentation for heading based on level.

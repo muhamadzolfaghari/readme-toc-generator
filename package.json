@@ -1,6 +1,6 @@
 {
   "name": "readme-toc-generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A generator for create table of contents for markdown files.",
   "main": "index.js",
   "scripts": {
