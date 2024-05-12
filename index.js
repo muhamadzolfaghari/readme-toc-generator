@@ -65,6 +65,7 @@ function getHeadingLink(anchor, title) {
     .split(" ")
     .map((x) => x.toLowerCase())
     .join("-")
+    .replace(/\./g, "");
 }
 
 

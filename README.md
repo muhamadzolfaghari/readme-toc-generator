@@ -17,7 +17,6 @@ After specifying the input file, an output file named README-TOC.md is automatic
 ### v1.0.0
 - Initial release
 
-
 ## Usage
 
 1. Run the following command to start the application:
