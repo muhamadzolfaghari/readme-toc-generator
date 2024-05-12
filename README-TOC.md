@@ -1,4 +1,4 @@
-Readme TOC Generator 🧬
+Readme TOC Generator  **v1.1.0**🧬
 
 An generator for creating a table of contents for Markdown files.
 
@@ -8,6 +8,12 @@ After specifying the input file, an output file named README-TOC.md is automatic
 
 ## Table of Contents
 
+ - [Changelog](#changelog)
+
+   - [v1.1.0](#v110)
+
+   - [v1.0.0](#v100)
+
  - [Usage](#usage)
 
    - [Sample path to file](#sample-path-to-file)
@@ -16,6 +22,17 @@ After specifying the input file, an output file named README-TOC.md is automatic
 
  - [Attention before usage](#attention-before-usage)
 
+
+## Changelog
+
+### v1.1.0
+- Added support for numbered headings
+- Improved error handling and user interface for file input
+- Added support for generating table of contents for nested headings
+- Fixed issue with incorrect indentation for nested headings
+
+### v1.0.0
+- Initial release
 
 ## Usage
 
