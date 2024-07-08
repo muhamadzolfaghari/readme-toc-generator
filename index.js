@@ -12,6 +12,8 @@ rl.question("Enter markdown path: ", (input) => {
   rl.close();
 });
 
+const FORBIDDEN_CHARS = [":"];
+
 /**
  * Generates a table of contents for a Markdown file and writes it to a new file.
  *
@@ -23,7 +25,7 @@ function writeTOCFile(input) {
   const { dir, name, ext } = path.parse(input);
 
   if (!validateInput(input, ext)) {
-    return
+    return;
   }
 
   try {
@@ -61,13 +63,18 @@ function getHeadingLink(anchor, title) {
     title = title.replace(". ", "-");
   }
 
-  return title
+  title = title
     .split(" ")
     .map((x) => x.toLowerCase())
     .join("-")
     .replace(/\./g, "");
-}
 
+  for (const char of FORBIDDEN_CHARS) {
+    title = title.replaceAll(char, "");
+  }
+
+  return title;
+}
 
 /**
  * Validates the provided input file path and extension.
@@ -83,13 +90,14 @@ function validateInput(input, ext) {
   }
 
   if (!fs.existsSync(input)) {
-    console.error("Invalid path. Please provide a valid path to a Markdown file.");
+    console.error(
+      "Invalid path. Please provide a valid path to a Markdown file.",
+    );
     return false;
   }
 
   return true;
 }
-
 
 /**
  * Generates indentation for heading based on level.
