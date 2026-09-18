@@ -1,6 +1,17 @@
-Readme TOC Generator  **v1.1.0**🧬
+# Archived
 
-An generator for creating a table of contents for Markdown files.
+> [!WARNING]
+> **This repository is archived and no longer under active development.**
+>
+> The project has evolved and continued active development as **[docs-healthcheck](https://github.com/muhamadzolfaghari/docs-healthcheck)**.
+>
+> The original Markdown TOC generation logic became part of a broader, professional documentation quality validation system.
+
+---
+
+# Readme TOC Generator  **v1.1.1**🧬
+
+A generator for creating a table of contents for Markdown files.
 
 After specifying the input file, an output file named README-TOC.md is automatically generated in the same directory as
 the input file, containing the generated table of contents.
@@ -10,19 +21,12 @@ the input file, containing the generated table of contents.
 ## Table of Contents
 
 - [Changelog](#changelog)
-
     - [v1.1.1](#v111)
-
     - [v1.1.0](#v110)
-
     - [v1.0.0](#v100)
-
 - [Usage](#usage)
-
     - [Sample path to file](#sample-path-to-file)
-
 - [Error and Exception](#error-and-exception)
-
 - [Attention before usage](#attention-before-usage)
 
 ## Changelog
@@ -79,4 +83,3 @@ is unable to write the generated table of contents to the file, it will also thr
 
 This project is tested in Windows but not tested in Linux or other systems. Feel free to make issues if you face any
 problems.
-
